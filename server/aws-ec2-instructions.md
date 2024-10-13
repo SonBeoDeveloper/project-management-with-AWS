@@ -26,14 +26,14 @@
   nvm install node
   ```
 
-- **Verify that Node.js and bun are installed:**
+- **Verify that Node.js and npm are installed:**
 
   ```
   node -v
   ```
 
   ```
-  bun -v
+  npm -v
   ```
 
 ## 3. Install Git
@@ -71,7 +71,7 @@
   ```
 
   ```
-  bun i
+  npm i
   ```
 
 - **Create Env File and Port 80:**
@@ -82,7 +82,7 @@
 
 - **Start the application:**
   ```
-  bun run dev
+  npm run dev
   ```
 
 ## 4. Install pm2 (Production Process Manager for Node.js)
@@ -90,13 +90,13 @@
 - **Install pm2 globally:**
 
   ```
-  bun i pm2 -g
+  npm i pm2 -g
   ```
 
 - **Create a pm2 ecosystem configuration file (inside server directory):**
 
   ```
-  module.exports = { apps : [{ name: 'inventory-management', script: 'bun', args: 'run dev', env: { NODE_ENV: 'development', ENV_VAR1: 'environment-variable', } }], };
+  module.exports = { apps : [{ name: 'inventory-management', script: 'npm', args: 'run dev', env: { NODE_ENV: 'development', ENV_VAR1: 'environment-variable', } }], };
   ```
 
 - **Modify the ecosystem file if necessary:**
