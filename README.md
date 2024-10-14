@@ -46,3 +46,39 @@ pm2 start ecosystem.config.js
         }
     ]
 }
+
+
+# lambda-trigger.
+import https from "node.https";
+
+export const handler = async (event) => {
+  const postData = JSON.stringify({
+    username: event.request.userAttributes['preferrd_username'] || event.userName,
+    cognitoId: event.userName,
+    profilePictureUrl:"i1.png",
+    teamId:1
+  });
+  const options={
+    hostname:"n4wr92l014.execute-api.us-east-1.amazonaws.com",
+    port: 443,
+    path: '/create-user',
+    method: "POST",
+    header:{
+      "Content-Type":"application/json",
+      "Content-length": Buffer.byteLength(postData)
+    }
+  };
+  
+  return new Promise((resolve,reject) =>{
+    const req = https.request(options, (res) =>{
+      res.setEncoding("utf8");
+      let responseBody = "";
+      res.on("data", (chunk)=> responseBody +=chunk);
+      res.on("end", ()=> resolve(responseBody))
+    });
+    req.on("error", (error)=>reject(error));
+    req.write(postData);
+    req.end()
+  });
+  return event
+};

@@ -2,7 +2,7 @@
 import { useAppSelector } from '@/app/redux'
 import Header from '@/components/Header'
 import ModalNewTask from '@/components/ModalNewTask'
-import { Priority, Task, useGetTasksByUserQuery } from '@/state/api'
+import { Priority, Task, useGetAuthUserQuery, useGetTasksByUserQuery } from '@/state/api'
 import React, { useState } from 'react'
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import TaskCard from '@/components/TaskCard'
@@ -69,7 +69,8 @@ const columns: GridColDef[] = [
 const ReusablePriorityPage = ({priority}: Props) => {
   const [view,setView] = useState("list")
   const [isModalNewTaskOpen, setIsModalNewTaskOpen] = useState(false)
-  const userId = 1
+  const {data: currentUser} = useGetAuthUserQuery({});
+  const userId = currentUser?.userDetails?.userId ?? null
   const {data: tasks, isLoading,isError: isTaskError} =useGetTasksByUserQuery(userId || 0,{
     skip: userId === null
   })
