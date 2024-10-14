@@ -31,3 +31,18 @@ bunx prisma generate
 bunx prisma migrate dev --name init
 bun run seed
 pm2 start ecosystem.config.js
+
+
+# s3
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "PublicReadGetObject",
+            "Effect": "Allow",
+            "Principal": "*",
+            "Action": "s3:GetObject",
+            "Resource": "arn:aws:s3:::pm-s3-images-son/*"
+        }
+    ]
+}
