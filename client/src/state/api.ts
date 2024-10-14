@@ -1,8 +1,5 @@
 
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import build from "next/dist/build";
-
-// import { fetchAuthSession, getCurrentUser } from "aws-amplify/auth";
 
 export interface Project {
   id: number;
@@ -53,7 +50,6 @@ export interface Task {
   projectId: number;
   authorUserId?: number;
   assignedUserId?: number;
-
   author?: User;
   assignee?: User;
   comments?: Comment[];
@@ -101,7 +97,7 @@ export const api = createApi({
                 ? result.map(({ id }) => ({ type: "Tasks", id }))
                 : [{ type: "Tasks", id: userId }],
     }),
-    createTask: build.mutation<Task,Partial<Project>>({
+    createTask: build.mutation<Task,Partial<Task>>({
       query:(task)=>({
         url:'tasks',
         method: "POST",
