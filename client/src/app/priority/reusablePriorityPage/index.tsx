@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import { useAppSelector } from '@/app/redux'
 import Header from '@/components/Header'
 import ModalNewTask from '@/components/ModalNewTask'
@@ -73,6 +73,8 @@ const ReusablePriorityPage = ({priority}: Props) => {
   const {data: tasks, isLoading,isError: isTaskError} =useGetTasksByUserQuery(userId || 0,{
     skip: userId === null
   })
+  console.log("tasks:", tasks);
+  
   const isDarkMode = useAppSelector((state)=> state.global.isDarkMode)
   const filteredTasks = tasks?.filter((task:Task)=> task.priority === priority)
   if (isTaskError ||!tasks) return <div className="">Error fetching task</div>
