@@ -4,7 +4,7 @@ import { Priority } from "@/state/api";
 
 const Urgent = () => {
   return <ReusablePriorityPage 
-//   priority={Priority.Urgent} 
+  priority={Priority.Urgent} 
   />;
 };
 
